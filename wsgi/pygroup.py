@@ -84,8 +84,8 @@ else:
     template_root_dir = _curdir + "/static"
 # 資料庫選用
 # 內建使用 sqlite3
-#ormdb = "sqlite"
-ormdb = "mysql"
+ormdb = "sqlite"
+#ormdb = "mysql"
 if ormdb == "sqlite":
     Database.set_dbapi(sqlite3)
     Database.config(db=data_dir+"task.db")
