@@ -15,7 +15,7 @@
 <v t="course-mde-tw.20140417093332.2000"><vh>@string initial_split_orientation = horizontal</vh></v>
 <v t="course-mde-tw.20140417093332.2001"><vh>@string rst3_write_intermediate_extension = .rst</vh></v>
 </v>
-<v t="2014spring.20140723175454.2635" a="E"><vh>2014Fall 電腦輔助設計實習專案</vh>
+<v t="2014spring.20140723175454.2635" a="E"><vh>2014Fall 雲端課程專案</vh>
 <v t="2014fall.20140821113240.3140"><vh>帳號驗證</vh></v>
 <v t="2014fall.20140821113240.3145"><vh>近端 MySQL 工具</vh></v>
 <v t="2014fall.20140821113240.3139" a="E"><vh>資料庫 ORM</vh>
@@ -125,19 +125,33 @@ CREATE TABLE `uploadfile` (
   `filename`,
   `filesize`
 )</t>
-<t tx="2014fall.20140821113240.3143">CREATE TABLE `task` (
+<t tx="2014fall.20140821113240.3143">MySQL:
+
+CREATE TABLE `task` (
 	`id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`owner` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
 	`type` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
 	`time` DATETIME NOT NULL,
 	`content` LONGTEXT NULL COLLATE 'utf8_unicode_ci',
-	`ip` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
+	`ip` VARCHAR(64) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
 	`follow` BIGINT(20) UNSIGNED NOT NULL DEFAULT '0',
 	PRIMARY KEY (`id`)
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
+
+SQLite:
+
+CREATE TABLE task(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            owner TEXT,
+            type TEXT,
+            time TEXT,
+            content TEXT,
+            ip TEXT,
+            follow INTEGER)
 </t>
 <t tx="2014fall.20140821113240.3144">http://skylark.readthedocs.org/en/latest/cases.html#pagination</t>
 <t tx="2014fall.20140821113240.3145">http://www.heidisql.com/</t>
@@ -147,7 +161,7 @@ http://cadp-cmsimplydemo.rhcloud.com/tasklist?id=59</t>
 <t tx="2014fall.20140821113240.3147">假如在 OpenShift 上要使用 Adsense, 唯一的方法是採用客製化符號名稱
 
 原因是 rhcloud.com 用戶眾多, 只要一個網站違反 Google 規定, 整個網域都無法使用 Adsense</t>
-<t tx="2014fall.20140826101705.4466">配置到 http://cp-2013fall.rhcloud.com/
+<t tx="2014fall.20140826101705.4466">配置到 http://2014fall-2013fall.rhcloud.com/
 
 步驟:
 
@@ -187,6 +201,8 @@ course-mde-tw 為協同人員
 <t tx="2014pythonE.20140424070658.1679"></t>
 <t tx="2014spring.20140723175454.2635">是的, 我們想要開發一個雲端群組軟體套件, 名稱為 pygroup
 
+這個版本內定使用 SQLite 資料庫
+
 基本功能:
 
 1. 讓 gmail 帳號可以登入本系統, 主要目的在讓學員可以自行管理 gmail 帳號密碼.
@@ -215,7 +231,7 @@ pygroup_config
 <t tx="2015.20140826151106.2090">password:encrypted password
 adsense:no/yes
 anonymous:no/yes
-user_mail_suffix:gm.nfu.edu.tw
+user_mail_suffix:gm.nfu.edu.tw (功能尚未置入)
 site_closed:no/yes
 
 admin 管理者密碼
@@ -236,7 +252,9 @@ mail_suffix:
 site_closed: yes/no
 read_only: yes/no</t>
 <t tx="2015.20140901003454.2095">若登入有用戶想要連結的 ip, 則登入後直接轉到該 ip 對應資料</t>
-<t tx="2015.20140902161836.5388">import os
+<t tx="2015.20140902161836.5388">原先考慮要利用 shutil 複製檔案用
+
+import os
 import shutil
 sourcePath = r'D:\some\path'
 destPath = r'D:\some\other\path'
